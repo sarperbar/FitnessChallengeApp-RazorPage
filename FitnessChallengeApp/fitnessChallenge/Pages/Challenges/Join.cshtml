@@ -1,0 +1,32 @@
+@page "{id:int}"
+@model fitnessChallenge.Pages.Challenges.JoinModel
+
+<h2>Join Challenge</h2>
+
+<form method="post">
+    <div>
+        <label>Name</label>
+        <input value="@Model.Challenge.Name" readonly />
+    </div>
+    <div>
+        <label>Description</label>
+        <input value="@Model.Challenge.Description" readonly />
+    </div>
+    <div>
+        <label>Start Date</label>
+        <input value="@Model.Challenge.StartDate.ToShortDateString()" readonly />
+    </div>
+    <div>
+        <label>End Date</label>
+        <input value="@Model.Challenge.EndDate.ToShortDateString()" readonly />
+    </div>
+    <div>
+        <label>Difficulty</label>
+        <input value="@Model.Challenge.Difficulty" readonly />
+    </div>
+    <div>
+        <label>Category</label>
+        <input value="@Model.Challenge.Category" readonly />
+    </div>
+    <button type="submit">Join Challenge</button>
+</form>

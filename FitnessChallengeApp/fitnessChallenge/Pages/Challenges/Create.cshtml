@@ -1,0 +1,30 @@
+@page
+@model fitnessChallenge.Pages.Challenges.CreateModel
+@using fitnessChallenge.Models
+<form method="post">
+    <div>
+        <label asp-for="Challenge.Name"></label>
+        <input asp-for="Challenge.Name" />
+    </div>
+    <div>
+        <label asp-for="Challenge.Description"></label>
+        <input asp-for="Challenge.Description" />
+    </div>
+    <div>
+        <label asp-for="Challenge.StartDate"></label>
+        <input asp-for="Challenge.StartDate" type="date" />
+    </div>
+    <div>
+        <label asp-for="Challenge.EndDate"></label>
+        <input asp-for="Challenge.EndDate" type="date" />
+    </div>
+    <div>
+        <label asp-for="Challenge.Difficulty"></label>
+        <select asp-for="Challenge.Difficulty" asp-items="Html.GetEnumSelectList<Challenge.DifficultyLevel>()"></select>
+    </div>
+    <div>
+        <label asp-for="Challenge.Category"></label>
+        <select asp-for="Challenge.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()"></select>
+    </div>
+    <button type="submit">Create Challenge</button>
+</form>

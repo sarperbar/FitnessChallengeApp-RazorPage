@@ -1,0 +1,33 @@
+@page
+@model fitnessChallenge.Pages.Challenges.IndexModel
+
+<h2>Challenges</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Difficulty</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var challenge in Model.Challenges)
+        {
+            <tr>
+                <td>@challenge.Name</td>
+                <td>@challenge.Description</td>
+                <td>@challenge.StartDate.ToShortDateString()</td>
+                <td>@challenge.EndDate.ToShortDateString()</td>
+                <td>@challenge.Difficulty</td>
+                <td>@challenge.Category</td>
+                <td>
+                    <a asp-page="./Join" asp-route-id="@challenge.ChallengeId">Join</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
