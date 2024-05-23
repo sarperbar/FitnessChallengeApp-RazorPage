@@ -1,64 +1,77 @@
 @page
 @model fitnessChallenge.Pages.Challenges.IndexModel
 @using fitnessChallenge.Models
+@{
+    ViewData["Title"] = "Challenges";
+}
 
-<h2>Challenges</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Challenges</h2>
+    
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label>Keyword</label>
+                <input type="text" asp-for="Search.Keyword" class="form-control" placeholder="Enter keyword" />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label>Difficulty</label>
+                <select asp-for="Search.Difficulty" asp-items="Html.GetEnumSelectList<Challenge.Difficulty_Level>()" class="form-control">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label>Category</label>
+                <select asp-for="Search.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()" class="form-control">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label>Start Date</label>
+                <input type="date" asp-for="Search.StartDate" class="form-control" />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label>End Date</label>
+                <input type="date" asp-for="Search.EndDate" class="form-control" />
+            </div>
+            <div class="col-md-3 mb-3 align-self-end">
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a href=".\Challenges" class="btn btn-secondary">Clear</a>
+            </div>
+        </div>
+    </form>
 
-<form method="get">
-    <div>
-        <label>Keyword</label>
-        <input type="text" asp-for="Search.Keyword" class="form-control" />
-    </div>
-    <div>
-        <label>Difficulty</label>
-        <select asp-for="Search.Difficulty" asp-items="Html.GetEnumSelectList<Challenge.Difficulty_Level>()" class="form-control">
-            <option value="">All</option>
-        </select>
-    </div>
-    <div>
-        <label>Category</label>
-        <select asp-for="Search.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()" class="form-control">
-            <option value="">All</option>
-        </select>
-    </div>
-    <div>
-        <label>Start Date</label>
-        <input type="date" asp-for="Search.StartDate" class="form-control" />
-    </div>
-    <div>
-        <label>End Date</label>
-        <input type="date" asp-for="Search.EndDate" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-    <a href=".\Challenges" class="btn btn-secondary">Clear</a>
-</form>
-
-<table class="table mt-4">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Difficulty Level</th>
-            <th>Category</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var challenge in Model.Challenges)
+    <div class="row">
+        @if (Model.Challenges != null && Model.Challenges.Count > 0)
         {
-            <tr>
-                <td>@challenge.Title</td>
-                <td>@challenge.Description</td>
-                <td>@challenge.StartDate.ToShortDateString()</td>
-                <td>@challenge.EndDate.ToShortDateString()</td>
-                <td>@challenge.DifficultyLevel</td>
-                <td>@challenge.Category</td>
-                <td>
-                    <a asp-page="./Join" asp-route-id="@challenge.Id">Join</a>
-                </td>
-            </tr>
+            foreach (var challenge in Model.Challenges)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@challenge.Title</h5>
+                            <p class="card-text">@challenge.Description</p>
+                            <p class="card-text">
+                                <strong>Difficulty:</strong> @challenge.DifficultyLevel.ToString() <br />
+                                <strong>Category:</strong> @challenge.Category.ToString()
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Start Date: @challenge.StartDate.ToShortDateString()</small> <br />
+                                <small class="text-muted">End Date: @challenge.EndDate.ToShortDateString()</small>
+                            </p>
+                            <a asp-page="./Fav" asp-route-id="@challenge.Id" class="btn btn-primary">Favorite Challenge</a>
+                        </div>
+                    </div>
+                </div>
+            }
         }
-    </tbody>
-</table>
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    No challenges found. <a href="/Challenges/Create" class="alert-link">Create a new challenge</a>.
+                </div>
+            </div>
+        }
+    </div>
+</div>

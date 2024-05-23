@@ -65,3 +65,81 @@ blockquote-footer {
 .list-unstyled {
   padding-left: 1.5rem;
 }
+
+
+.container.mt-5 {
+  margin-top: 5rem;
+}
+
+.text-center.mb-4 {
+  margin-bottom: 4rem;
+}
+
+.card.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.btn.btn-primary.btn-block {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+.container.mt-5 {
+  margin-top: 5rem;
+}
+
+.text-center.mb-4 {
+  margin-bottom: 4rem;
+}
+
+.card.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  margin-bottom: 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  margin-bottom: 0.75rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.alert {
+  margin-top: 2rem;
+}
