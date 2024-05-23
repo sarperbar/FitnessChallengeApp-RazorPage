@@ -1,30 +1,33 @@
 @page
 @model fitnessChallenge.Pages.Challenges.CreateModel
 @using fitnessChallenge.Models
+
+<h2>Create Challenge</h2>
+
 <form method="post">
     <div>
-        <label asp-for="Challenge.Name"></label>
-        <input asp-for="Challenge.Name" />
+        <label asp-for="Challenge.Title"></label>
+        <input asp-for="Challenge.Title" class="form-control" />
     </div>
     <div>
         <label asp-for="Challenge.Description"></label>
-        <input asp-for="Challenge.Description" />
+        <input asp-for="Challenge.Description" class="form-control" />
     </div>
     <div>
         <label asp-for="Challenge.StartDate"></label>
-        <input asp-for="Challenge.StartDate" type="date" />
+        <input asp-for="Challenge.StartDate" type="date" class="form-control" />
     </div>
     <div>
         <label asp-for="Challenge.EndDate"></label>
-        <input asp-for="Challenge.EndDate" type="date" />
+        <input asp-for="Challenge.EndDate" type="date" class="form-control" />
     </div>
     <div>
-        <label asp-for="Challenge.Difficulty"></label>
-        <select asp-for="Challenge.Difficulty" asp-items="Html.GetEnumSelectList<Challenge.DifficultyLevel>()"></select>
+        <label asp-for="Challenge.DifficultyLevel"></label>
+        <select asp-for="Challenge.DifficultyLevel" asp-items="Html.GetEnumSelectList<Challenge.Difficulty_Level>()" class="form-control"></select>
     </div>
     <div>
         <label asp-for="Challenge.Category"></label>
-        <select asp-for="Challenge.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()"></select>
+        <select asp-for="Challenge.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()" class="form-control"></select>
     </div>
-    <button type="submit">Create Challenge</button>
+    <button type="submit" class="btn btn-primary">Create Challenge</button>
 </form>
