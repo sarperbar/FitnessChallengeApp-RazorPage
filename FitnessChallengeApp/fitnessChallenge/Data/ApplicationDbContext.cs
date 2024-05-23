@@ -1,23 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using fitnessChallenge.Models;
 
-namespace fitnessChallenge.Data;
-
-public class ApplicationDbContext : IdentityDbContext
+namespace fitnessChallenge.Data
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Challenge> Challenges { get; set; }
     }
 }
-
-/*
-public class AppIdentityDbContext : IdentityDbContext<ApplicationUser>
-{
-    public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
-        : base(options)
-    {
-    }
-}
-
-*/
