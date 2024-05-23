@@ -4,7 +4,36 @@
 
 <h2>Challenges</h2>
 
-<table class="table">
+<form method="get">
+    <div>
+        <label>Keyword</label>
+        <input type="text" asp-for="Search.Keyword" class="form-control" />
+    </div>
+    <div>
+        <label>Difficulty</label>
+        <select asp-for="Search.Difficulty" asp-items="Html.GetEnumSelectList<Challenge.Difficulty_Level>()" class="form-control">
+            <option value="">All</option>
+        </select>
+    </div>
+    <div>
+        <label>Category</label>
+        <select asp-for="Search.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()" class="form-control">
+            <option value="">All</option>
+        </select>
+    </div>
+    <div>
+        <label>Start Date</label>
+        <input type="date" asp-for="Search.StartDate" class="form-control" />
+    </div>
+    <div>
+        <label>End Date</label>
+        <input type="date" asp-for="Search.EndDate" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+    <a href=".\Challenges" class="btn btn-secondary">Clear</a>
+</form>
+
+<table class="table mt-4">
     <thead>
         <tr>
             <th>Title</th>
