@@ -59,7 +59,11 @@
                                 <small class="text-muted">Start Date: @challenge.StartDate.ToShortDateString()</small> <br />
                                 <small class="text-muted">End Date: @challenge.EndDate.ToShortDateString()</small>
                             </p>
-                            <a asp-page="./Fav" asp-route-id="@challenge.Id" class="btn btn-primary">Favorite Challenge</a>
+                            <p class="card-text">
+                                <strong>Average Rating:</strong> @challenge.AverageRating.ToString("0.0")
+                            </p>
+                            <a asp-page="./Join" asp-route-id="@challenge.Id" class="btn btn-primary">Join Challenge</a>
+                            <a asp-page="./Review" asp-route-id="@challenge.Id" class="btn btn-secondary">Review Challenge</a>
                         </div>
                     </div>
                 </div>

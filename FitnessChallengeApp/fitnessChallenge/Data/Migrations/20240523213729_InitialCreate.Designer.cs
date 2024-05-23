@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using fitnessChallenge.Data;
 
@@ -11,9 +12,11 @@ using fitnessChallenge.Data;
 namespace fitnessChallenge.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240523213729_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -355,17 +358,12 @@ namespace fitnessChallenge.Data.Migrations
             modelBuilder.Entity("fitnessChallenge.Models.Review", b =>
                 {
                     b.HasOne("fitnessChallenge.Models.Challenge", "Challenge")
-                        .WithMany("Reviews")
+                        .WithMany()
                         .HasForeignKey("ChallengeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Challenge");
-                });
-
-            modelBuilder.Entity("fitnessChallenge.Models.Challenge", b =>
-                {
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

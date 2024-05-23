@@ -1,0 +1,50 @@
+@page "{id:int}"
+@model fitnessChallenge.Pages.Challenges.ReviewModel
+@using fitnessChallenge.Models
+@{
+    ViewData["Title"] = "Review Challenge";
+}
+
+<div class="container mt-5">
+    @if (Model.Challenge != null)
+    {
+        <h2 class="text-center mb-4">Review @Model.Challenge.Title</h2>
+    }
+    else
+    {
+        <h2 class="text-center mb-4">Challenge not found</h2>
+    }
+    
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post">
+                <div class="form-group">
+                    <label>Your Rating</label>
+                    <div id="rateYo"></div>
+                    <input type="hidden" asp-for="Review.Rating" id="rating">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Review.Comment">Your Comment</label>
+                    <textarea asp-for="Review.Comment" class="form-control" rows="3" placeholder="Enter your comment"></textarea>
+                    <span asp-validation-for="Review.Comment" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#rateYo").rateYo({
+                fullStar: true,
+                onSet: function (rating, rateYoInstance) {
+                    $("#rating").val(rating);
+                }
+            });
+        });
+    </script>
+}
