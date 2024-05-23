@@ -13,6 +13,26 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\community.jpg",
+      "PackagePath": "staticwebassets\\images\\community.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\create-challenge.jpg",
+      "PackagePath": "staticwebassets\\images\\create-challenge.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\explore-challenges.jpg",
+      "PackagePath": "staticwebassets\\images\\explore-challenges.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\featurette.jpg",
+      "PackagePath": "staticwebassets\\images\\featurette.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\testimonials.jpg",
+      "PackagePath": "staticwebassets\\images\\testimonials.jpg"
+    },
+    {
       "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
