@@ -265,6 +265,14 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\lib\\rateYo\\rateYo.min.css",
+      "PackagePath": "staticwebassets\\lib\\rateYo\\rateYo.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\lib\\rateYo\\rateYo.min.js",
+      "PackagePath": "staticwebassets\\lib\\rateYo\\rateYo.min.js"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.fitnessChallenge.props",
       "PackagePath": "build\\fitnessChallenge.props"
     },

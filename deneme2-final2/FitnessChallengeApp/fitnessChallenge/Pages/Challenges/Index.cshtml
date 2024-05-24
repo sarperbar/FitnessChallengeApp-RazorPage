@@ -1,6 +1,7 @@
 @page
 @model fitnessChallenge.Pages.Challenges.IndexModel
 @using fitnessChallenge.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">Challenges</h2>
@@ -43,11 +44,13 @@
         {
             foreach (var challenge in Model.Challenges)
             {
+                var averageRating = Model.ChallengeRatings.ContainsKey(challenge.Id) ? Model.ChallengeRatings[challenge.Id] : 0;
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">@challenge.Title</h5>
                             <p class="card-text">@challenge.Description</p>
+                            <div id="rating-@challenge.Id" class="rating" data-rating="@averageRating"></div>
                             <p class="card-text">
                                 <strong>Difficulty:</strong> @challenge.DifficultyLevel.ToString() <br />
                                 <strong>Category:</strong> @challenge.Category.ToString()
@@ -56,21 +59,20 @@
                                 <small class="text-muted">Start Date: @challenge.StartDate.ToShortDateString()</small> <br />
                                 <small class="text-muted">End Date: @challenge.EndDate.ToShortDateString()</small>
                             </p>
-                         <div class="d-flex justify-content-between">
-    @if (Model.FavoriteChallenges.Any(fc => fc.ChallengeId == challenge.Id))
-    {
-        <button class="btn btn-secondary" disabled>Faved</button>
-    }
-    else
-    {
-        <form method="post" asp-page-handler="Favorite">
-            <input type="hidden" name="challengeId" value="@challenge.Id" />
-            <button type="submit" class="btn btn-primary">Fav</button>
-        </form>
-    }
-    <a asp-page="./Review" asp-route-id="@challenge.Id" class="btn btn-secondary">Review</a>
-</div>
-
+                            <div class="d-flex justify-content-between">
+                                @if (Model.FavoriteChallenges.Any(fc => fc.ChallengeId == challenge.Id))
+                                {
+                                    <button class="btn btn-secondary" disabled>Faved</button>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-page-handler="Favorite">
+                                        <input type="hidden" name="challengeId" value="@challenge.Id" />
+                                        <button type="submit" class="btn btn-primary">Fav</button>
+                                    </form>
+                                }
+                                <a asp-page="./Review" asp-route-id="@challenge.Id" class="btn btn-secondary">Review</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,3 +88,20 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".rating").each(function() {
+                var rating = $(this).data("rating");
+                $(this).rateYo({
+                    rating: rating,
+                    readOnly: true,
+                    starWidth: "20px"
+                });
+            });
+        });
+    </script>
+}

@@ -14,22 +14,69 @@
     {
         <h2 class="text-center mb-4">Challenge not found</h2>
     }
-    
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form method="post">
-                <div class="form-group text-center">
-                    <label>Your Rating</label>
-                    <div id="rateYo"></div>
-                    <input type="hidden" asp-for="Review.Rating" id="rating">
-                </div>
-                <div class="form-group">
-                    <label asp-for="Review.Comment">Your Comment</label>
-                    <textarea asp-for="Review.Comment" class="form-control" rows="3" placeholder="Enter your comment"></textarea>
-                    <span asp-validation-for="Review.Comment" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
-            </form>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    @if (!Model.HasUserReviewed)
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post">
+                    <div class="form-group text-center">
+                        <label>Your Rating</label>
+                        <div id="rateYo"></div>
+                        <input type="hidden" asp-for="Review.Rating" id="rating">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Review.Comment">Your Comment</label>
+                        <textarea asp-for="Review.Comment" class="form-control" rows="3" placeholder="Enter your comment"></textarea>
+                        <span asp-validation-for="Review.Comment" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center" role="alert">
+            You have already reviewed this challenge.
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <h3>Your Review</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>@Model.UserReview?.UserName:</strong> @Model.UserReview?.Comment
+                        <div class="rating" data-rating="@Model.UserReview?.Rating"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <h3>Existing Reviews</h3>
+            @if (Model.ExistingReviews != null && Model.ExistingReviews.Count > 0)
+            {
+                <ul class="list-group">
+                    @foreach (var review in Model.ExistingReviews)
+                    {
+                        <li class="list-group-item">
+                            <strong>@review.UserName:</strong> @review.Comment
+                            <div class="rating" data-rating="@review.Rating"></div>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No reviews yet.</p>
+            }
         </div>
     </div>
 </div>
@@ -38,15 +85,24 @@
     <script>
         $(document).ready(function () {
             $("#rateYo").rateYo({
-                rating: 3.6, // Başlangıçta gösterilecek değerlendirme değeri
-                fullStar: true, // Kullanıcının tam yıldızları seçmesini sağla
-                starWidth: "30px", // Yıldız boyutu
-                normalFill: "#A0A0A0", // Boş yıldız rengi
-                ratedFill: "#E74C3C", // Dolu yıldız rengi
+                rating: 3.6, 
+                fullStar: true, 
+                starWidth: "30px", 
+                normalFill: "#A0A0A0", 
+                ratedFill: "#E74C3C", 
                 onSet: function (rating, rateYoInstance) {
                     $("#rating").val(rating);
                 }
-            }).css("display", "inline-block"); // Yıldızları satır içi blok olarak göster
+            }).css("display", "inline-block"); 
+            
+            $(".rating").each(function() {
+                var rating = $(this).data("rating");
+                $(this).rateYo({
+                    rating: rating,
+                    readOnly: true,
+                    starWidth: "20px"
+                });
+            });
         });
     </script>
 }

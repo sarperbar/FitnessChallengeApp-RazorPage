@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "I8s9iWEkn3aKCD9gleMPdzLgPhP9OqCk4YVCsmUEP0w=",
+  "Hash": "de3Kq6/g8kdTocH47bHZ0+v64dn2QeD31tb0o7rr6fc=",
   "Source": "fitnessChallenge",
   "BasePath": "_content/fitnessChallenge",
   "Mode": "Default",
@@ -2428,6 +2428,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\lib\\rateYo\\rateYo.min.css",
+      "SourceId": "fitnessChallenge",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\",
+      "BasePath": "_content/fitnessChallenge",
+      "RelativePath": "lib/rateYo/rateYo.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\rateYo\\rateYo.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\lib\\rateYo\\rateYo.min.js",
+      "SourceId": "fitnessChallenge",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\",
+      "BasePath": "_content/fitnessChallenge",
+      "RelativePath": "lib/rateYo/rateYo.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\rateYo\\rateYo.min.js"
     }
   ]
 }

@@ -23,7 +23,8 @@ namespace fitnessChallenge.Pages.Challenges
 
         public IList<Challenge> Challenges { get; set; }
         public IList<FavoriteChallenge> FavoriteChallenges { get; set; }
-        [BindProperty]
+        public Dictionary<int, double> ChallengeRatings { get; set; } 
+        [BindProperty(SupportsGet = true)]
         public SearchModel Search { get; set; }
 
         public class SearchModel
@@ -37,7 +38,6 @@ namespace fitnessChallenge.Pages.Challenges
 
         public async Task OnGetAsync()
         {
-            Search = new SearchModel();
             var query = _context.Challenges.AsQueryable();
 
             if (!string.IsNullOrEmpty(Search?.Keyword))
@@ -73,6 +73,15 @@ namespace fitnessChallenge.Pages.Challenges
             else
             {
                 FavoriteChallenges = new List<FavoriteChallenge>();
+            }
+
+            ChallengeRatings = new Dictionary<int, double>();
+            foreach (var challenge in Challenges)
+            {
+                var averageRating = await _context.Reviews
+                    .Where(r => r.ChallengeId == challenge.Id)
+                    .AverageAsync(r => (double?)r.Rating) ?? 0;
+                ChallengeRatings[challenge.Id] = averageRating;
             }
         }
 
