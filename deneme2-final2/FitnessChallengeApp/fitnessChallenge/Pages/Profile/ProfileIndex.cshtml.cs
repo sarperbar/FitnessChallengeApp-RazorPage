@@ -1,26 +1,28 @@
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using fitnessChallenge.Data;
 using fitnessChallenge.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace fitnessChallenge.Pages.Profile
 {
-    public class IndexModel : PageModel
+    public class ProfileIndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public ProfileIndexModel(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
-            _context = context;
             _userManager = userManager;
+            _context = context;
         }
 
+        public string ProfilePictureUrl { get; set; }
+        public string Bio { get; set; }
         public IList<FavoriteChallenge> FavoriteChallenges { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -28,8 +30,12 @@ namespace fitnessChallenge.Pages.Profile
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return RedirectToPage("/Account/Login", new { area = "Identity" });
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            var claims = await _userManager.GetClaimsAsync(user);
+            ProfilePictureUrl = claims.FirstOrDefault(c => c.Type == "ProfilePictureUrl")?.Value;
+            Bio = claims.FirstOrDefault(c => c.Type == "Bio")?.Value;
 
             FavoriteChallenges = await _context.FavoriteChallenges
                 .Include(fc => fc.Challenge)
