@@ -18,7 +18,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post">
-                <div class="form-group">
+                <div class="form-group text-center">
                     <label>Your Rating</label>
                     <div id="rateYo"></div>
                     <input type="hidden" asp-for="Review.Rating" id="rating">
@@ -35,16 +35,18 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#rateYo").rateYo({
-                fullStar: true,
+                rating: 3.6, // Başlangıçta gösterilecek değerlendirme değeri
+                fullStar: true, // Kullanıcının tam yıldızları seçmesini sağla
+                starWidth: "30px", // Yıldız boyutu
+                normalFill: "#A0A0A0", // Boş yıldız rengi
+                ratedFill: "#E74C3C", // Dolu yıldız rengi
                 onSet: function (rating, rateYoInstance) {
                     $("#rating").val(rating);
                 }
-            });
+            }).css("display", "inline-block"); // Yıldızları satır içi blok olarak göster
         });
     </script>
 }
