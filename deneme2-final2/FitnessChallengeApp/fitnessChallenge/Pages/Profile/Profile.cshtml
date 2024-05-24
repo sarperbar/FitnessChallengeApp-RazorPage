@@ -1,0 +1,44 @@
+@page
+@model fitnessChallenge.Pages.ProfileModel
+@using fitnessChallenge.Models
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Favorite Challenges</h2>
+
+    <div class="row">
+        @if (Model.FavoriteChallenges != null && Model.FavoriteChallenges.Count > 0)
+        {
+            foreach (var challenge in Model.FavoriteChallenges)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@challenge.Title</h5>
+                            <p class="card-text">@challenge.Description</p>
+                            <p class="card-text">
+                                <strong>Difficulty:</strong> @challenge.DifficultyLevel.ToString() <br />
+                                <strong>Category:</strong> @challenge.Category.ToString()
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Start Date: @challenge.StartDate.ToShortDateString()</small> <br />
+                                <small class="text-muted">End Date: @challenge.EndDate.ToShortDateString()</small>
+                            </p>
+                            <a asp-page="./Review" asp-route-id="@challenge.Id" class="btn btn-secondary">Review Challenge</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    You have no favorite challenges yet. <a href="/Challenges" class="alert-link">Explore challenges</a>.
+                </div>
+            </div>
+        }
+    </div>
+</div>
