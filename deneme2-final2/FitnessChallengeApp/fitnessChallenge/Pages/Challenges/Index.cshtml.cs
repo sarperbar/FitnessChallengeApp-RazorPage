@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,6 @@ using fitnessChallenge.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
 
 namespace fitnessChallenge.Pages.Challenges
 {
@@ -22,6 +22,7 @@ namespace fitnessChallenge.Pages.Challenges
         }
 
         public IList<Challenge> Challenges { get; set; }
+        public IList<FavoriteChallenge> FavoriteChallenges { get; set; }
         [BindProperty]
         public SearchModel Search { get; set; }
 
@@ -36,6 +37,7 @@ namespace fitnessChallenge.Pages.Challenges
 
         public async Task OnGetAsync()
         {
+            Search = new SearchModel();
             var query = _context.Challenges.AsQueryable();
 
             if (!string.IsNullOrEmpty(Search?.Keyword))
@@ -60,6 +62,18 @@ namespace fitnessChallenge.Pages.Challenges
             }
 
             Challenges = await query.ToListAsync();
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                FavoriteChallenges = await _context.FavoriteChallenges
+                    .Where(fc => fc.UserId == user.Id)
+                    .ToListAsync();
+            }
+            else
+            {
+                FavoriteChallenges = new List<FavoriteChallenge>();
+            }
         }
 
         public async Task<IActionResult> OnPostFavoriteAsync(int challengeId)
@@ -70,14 +84,20 @@ namespace fitnessChallenge.Pages.Challenges
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
 
-            var favorite = new FavoriteChallenge
-            {
-                UserId = user.Id,
-                ChallengeId = challengeId,
-            };
+            var existingFavorite = await _context.FavoriteChallenges
+                .FirstOrDefaultAsync(f => f.UserId == user.Id && f.ChallengeId == challengeId);
 
-            _context.FavoriteChallenges.Add(favorite);
-            await _context.SaveChangesAsync();
+            if (existingFavorite == null)
+            {
+                var favorite = new FavoriteChallenge
+                {
+                    UserId = user.Id,
+                    ChallengeId = challengeId,
+                };
+
+                _context.FavoriteChallenges.Add(favorite);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToPage();
         }

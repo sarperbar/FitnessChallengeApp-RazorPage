@@ -149,3 +149,9 @@ blockquote-footer {
   margin: 0 auto;
 }
 
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem; 
+}

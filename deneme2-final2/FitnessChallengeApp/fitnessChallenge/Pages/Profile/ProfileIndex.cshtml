@@ -1,5 +1,5 @@
 @page
-@model fitnessChallenge.Pages.ProfileModel
+@model fitnessChallenge.Pages.Profile.IndexModel
 @using fitnessChallenge.Models
 @{
     ViewData["Title"] = "My Profile";
@@ -11,8 +11,9 @@
     <div class="row">
         @if (Model.FavoriteChallenges != null && Model.FavoriteChallenges.Count > 0)
         {
-            foreach (var challenge in Model.FavoriteChallenges)
+            foreach (var favorite in Model.FavoriteChallenges)
             {
+                var challenge = favorite.Challenge;
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-body">
@@ -26,7 +27,10 @@
                                 <small class="text-muted">Start Date: @challenge.StartDate.ToShortDateString()</small> <br />
                                 <small class="text-muted">End Date: @challenge.EndDate.ToShortDateString()</small>
                             </p>
-                            <a asp-page="./Review" asp-route-id="@challenge.Id" class="btn btn-secondary">Review Challenge</a>
+                            <a asp-page="/Challenges/Review" asp-route-id="@challenge.Id" class="btn btn-secondary">Review Challenge</a>
+                            <form method="post" asp-page-handler="RemoveFavorite" asp-route-favoriteId="@favorite.Id" class="mt-2">
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
                         </div>
                     </div>
                 </div>
