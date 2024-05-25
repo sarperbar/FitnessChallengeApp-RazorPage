@@ -4,40 +4,110 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
+<style>
+    body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        font-family: 'Open Sans', sans-serif;
+         display: flex;
+        justify-content: center;
+        align-items: center; 
+        height: 100vh;
+        margin: 0;
+    }
 
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.EmailOrUsername"></label>
-                    <input asp-for="Input.EmailOrUsername" class="form-control" />
-                    <span asp-validation-for="Input.EmailOrUsername" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input asp-for="Input.RememberMe" class="form-check-input" />
-                        <label asp-for="Input.RememberMe" class="form-check-label"></label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Log in</button>
-            </form>
-        </section>
-        <section>
-            <p>
-                <a asp-page="./ForgotPassword">Forgot your password?</a>
-            </p>
-        </section>
-    </div>
+    .card {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .card h1 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-control {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        margin-bottom: 15px;
+    }
+
+    .form-control:focus {
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(to right, #5a0fb9, #206ae3);
+    }
+
+    .text-danger {
+        color: #ff6b6b !important;
+    }
+
+    .form-check-label {
+        margin-left: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .forgot-password {
+        margin-top: 10px;
+    }
+
+    .logo {
+        display: block;
+        margin: 0 auto 20px;
+        max-width: 100px;
+    }
+</style>
+
+<div class="card">
+    <img src="~/images/logo.webp" alt="Logo" class="logo" />
+    <h1>@ViewData["Title"]</h1>
+    <section>
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.EmailOrUsername"></label>
+                <input asp-for="Input.EmailOrUsername" class="form-control" placeholder="Email or Username" />
+                <span asp-validation-for="Input.EmailOrUsername" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <input asp-for="Input.RememberMe" class="form-check-input" />
+                <label asp-for="Input.RememberMe" class="form-check-label"></label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Log in</button>
+        </form>
+    </section>
+    <section class="forgot-password">
+        <p>
+            <a asp-page="./ForgotPassword">Forgot your password?</a>
+        </p>
+    </section>
 </div>
 
 @section Scripts {

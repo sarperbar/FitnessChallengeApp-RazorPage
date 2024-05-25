@@ -4,8 +4,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <style>
-
-     body {
+    body {
         background: linear-gradient(to right, #6a11cb, #2575fc);
         font-family: 'Open Sans', sans-serif;
     }
@@ -108,6 +107,7 @@
                         <div class="card-body">
                             <h5 class="card-title">@challenge.Title</h5>
                             <p class="card-text">@challenge.Description</p>
+                            <p class="card-text"><strong>Created by:</strong> @challenge.UserName</p>
                             <div id="rating-@challenge.Id" class="rating" data-rating="@averageRating"></div>
                             <p class="card-text">
                                 <strong>Difficulty:</strong> @challenge.DifficultyLevel.ToString() <br />

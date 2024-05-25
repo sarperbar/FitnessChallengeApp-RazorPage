@@ -3,6 +3,34 @@
 @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>This project is made for CENG382 by Sarper ERBAR 202011001</p>
+<style>
+    body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    h1, p {
+        color: white;
+    }
+
+    #sarper {
+        display: block;
+        margin: 20px auto;
+        border-radius: 50%;
+        width: 200px;
+        height: 200px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    img:hover {
+        transform: scale(1.1);
+    }
+</style>
+
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <p>This project is made for CENG382 by Sarper ERBAR 202011001</p>
+    <img id="sarper" src="~/images/logo.webp" alt="Logo" />
+</div>
