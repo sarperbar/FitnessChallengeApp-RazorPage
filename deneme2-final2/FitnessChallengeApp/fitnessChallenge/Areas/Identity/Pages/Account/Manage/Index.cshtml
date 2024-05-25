@@ -5,59 +5,61 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h4>Manage your account</h4>
+<h2 class="text-center mt-4">Manage Your Account</h2>
 <hr />
 <div class="row">
-    <div class="col-md-8">
-        <section>
+    <div class="col-md-8 offset-md-2">
+        <section class="card p-4 shadow-sm mb-4">
+            <h4 class="text-primary">Account Information</h4>
+             <section class="card p-4 shadow-sm mb-4">
+            <div class="text-center">
+                @if (!string.IsNullOrEmpty(Model.Input.ProfilePictureUrl))
+                {
+                    <img src="@Model.Input.ProfilePictureUrl" alt="Profile Picture"  style="max-width: 300px; max-height: 300px;"/>
+                }
+                else
+                {
+                    <p>No profile picture set.</p>
+                }
+            </div>
+        </section>
+        
+        <section class="card p-4 shadow-sm">
+            <p class="text-muted">@Model.Input.Bio</p>
+        </section>
+    </div>
             <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                 <div class="form-group">
-                    <label asp-for="Input.Username"></label>
-                    <input asp-for="Input.Username" class="form-control" />
+                    <label asp-for="Input.Username" class="form-label"></label>
+                    <input asp-for="Input.Username" class="form-control" placeholder="Enter your username"/>
                     <span asp-validation-for="Input.Username" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
+                    <label asp-for="Input.Email" class="form-label"></label>
+                    <input asp-for="Input.Email" class="form-control" placeholder="Enter your email"/>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.PhoneNumber"></label>
-                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                    <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Enter your phone number"/>
                     <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.ProfilePictureUrl"></label>
-                    <input asp-for="Input.ProfilePictureUrl" class="form-control" />
+                    <label asp-for="Input.ProfilePictureUrl" class="form-label"></label>
+                    <input asp-for="Input.ProfilePictureUrl" class="form-control" placeholder="Enter profile picture URL"/>
                     <span asp-validation-for="Input.ProfilePictureUrl" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.Bio"></label>
-                    <textarea asp-for="Input.Bio" class="form-control"></textarea>
+                    <label asp-for="Input.Bio" class="form-label"></label>
+                    <textarea asp-for="Input.Bio" class="form-control" rows="3" placeholder="Tell us about yourself"></textarea>
                     <span asp-validation-for="Input.Bio" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Save</button>
             </form>
         </section>
-        <hr />
-        <div>
-            <h4>Profile Picture</h4>
-            @if (!string.IsNullOrEmpty(Model.Input.ProfilePictureUrl))
-            {
-                <img src="@Model.Input.ProfilePictureUrl" alt="Profile Picture" style="max-width: 150px; max-height: 150px;"/>
-            }
-            else
-            {
-                <p>No profile picture set.</p>
-            }
-        </div>
-        <hr />
-        <div>
-            <h4>Bio</h4>
-            <p>@Model.Input.Bio</p>
-        </div>
-    </div>
+        
+       
 </div>
 
 @section Scripts {

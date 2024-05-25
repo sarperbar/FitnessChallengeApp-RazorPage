@@ -3,16 +3,54 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - fitnessChallenge</title>
+    <title>@ViewData["Title"] - FitQuest</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <style>
+        .navbar {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+        .dropdown-menu {
+            background-color: #fff;
+        }
+        .dropdown-item {
+            color: black !important;
+        }
+        .dropdown-item:hover, .dropdown-item:focus {
+            background-color: #2575fc;
+            color: white !important;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 1rem 0;
+        }
+        .footer a {
+            color: #6a11cb;
+        }
+        .navbar-brand img {
+            max-height: 40px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">fitnessChallenge</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="~/images/logo.webp" alt="FitQuest Logo" class="rounded-circle">
+                    FitQuest
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,10 +58,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -37,9 +75,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - fitnessChallenge - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="footer text-muted">
+        <div class="container text-center">
+            &copy; 2024 - FitQuest - Sarper ERBAR 202011001 <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

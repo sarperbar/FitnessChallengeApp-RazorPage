@@ -47,14 +47,14 @@ namespace fitnessChallenge.Areas.Identity.Pages.Account.Manage
 
             [Phone]
             [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            public string? PhoneNumber { get; set; }
 
             [Url]
             [Display(Name = "Profile Picture URL")]
-            public string ProfilePictureUrl { get; set; }
+            public string? ProfilePictureUrl { get; set; }
 
             [Display(Name = "Bio")]
-            public string Bio { get; set; }
+            public string? Bio { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -93,80 +93,95 @@ namespace fitnessChallenge.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+       public async Task<IActionResult> OnPostAsync()
+{
+    var user = await _userManager.GetUserAsync(User);
+    if (user == null)
+    {
+        return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+    }
+
+    if (!ModelState.IsValid)
+    {
+        await LoadAsync(user);
+        return Page();
+    }
+
+    var userName = await _userManager.GetUserNameAsync(user);
+    if (Input.Username != userName)
+    {
+        var setUserNameResult = await _userManager.SetUserNameAsync(user, Input.Username);
+        if (!setUserNameResult.Succeeded)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                await LoadAsync(user);
-                return Page();
-            }
-
-            var userName = await _userManager.GetUserNameAsync(user);
-            if (Input.Username != userName)
-            {
-                var setUserNameResult = await _userManager.SetUserNameAsync(user, Input.Username);
-                if (!setUserNameResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set username.";
-                    return RedirectToPage();
-                }
-            }
-
-            var email = await _userManager.GetEmailAsync(user);
-            if (Input.Email != email)
-            {
-                var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
-                if (!setEmailResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set email.";
-                    return RedirectToPage();
-                }
-            }
-
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
-            }
-
-            var profilePictureUrlClaim = await _userManager.GetClaimsAsync(user);
-            var profilePictureUrl = profilePictureUrlClaim.FirstOrDefault(c => c.Type == "ProfilePictureUrl");
-            if (profilePictureUrl == null)
-            {
-                await _userManager.AddClaimAsync(user, new Claim("ProfilePictureUrl", Input.ProfilePictureUrl));
-            }
-            else if (profilePictureUrl.Value != Input.ProfilePictureUrl)
-            {
-                await _userManager.RemoveClaimAsync(user, profilePictureUrl);
-                await _userManager.AddClaimAsync(user, new Claim("ProfilePictureUrl", Input.ProfilePictureUrl));
-            }
-
-            var bioClaim = await _userManager.GetClaimsAsync(user);
-            var bio = bioClaim.FirstOrDefault(c => c.Type == "Bio");
-            if (bio == null)
-            {
-                await _userManager.AddClaimAsync(user, new Claim("Bio", Input.Bio));
-            }
-            else if (bio.Value != Input.Bio)
-            {
-                await _userManager.RemoveClaimAsync(user, bio);
-                await _userManager.AddClaimAsync(user, new Claim("Bio", Input.Bio));
-            }
-
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Unexpected error when trying to set username.";
             return RedirectToPage();
         }
+    }
+
+    var email = await _userManager.GetEmailAsync(user);
+    if (Input.Email != email)
+    {
+        var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
+        if (!setEmailResult.Succeeded)
+        {
+            StatusMessage = "Unexpected error when trying to set email.";
+            return RedirectToPage();
+        }
+    }
+
+    var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+    if (Input.PhoneNumber != phoneNumber)
+    {
+        var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+        if (!setPhoneResult.Succeeded)
+        {
+            StatusMessage = "Unexpected error when trying to set phone number.";
+            return RedirectToPage();
+        }
+    }
+
+    var claims = await _userManager.GetClaimsAsync(user);
+
+    var profilePictureUrlClaim = claims.FirstOrDefault(c => c.Type == "ProfilePictureUrl");
+    if (!string.IsNullOrEmpty(Input.ProfilePictureUrl))
+    {
+        if (profilePictureUrlClaim == null)
+        {
+            await _userManager.AddClaimAsync(user, new Claim("ProfilePictureUrl", Input.ProfilePictureUrl));
+        }
+        else if (profilePictureUrlClaim.Value != Input.ProfilePictureUrl)
+        {
+            await _userManager.RemoveClaimAsync(user, profilePictureUrlClaim);
+            await _userManager.AddClaimAsync(user, new Claim("ProfilePictureUrl", Input.ProfilePictureUrl));
+        }
+    }
+    else if (profilePictureUrlClaim != null)
+    {
+        await _userManager.RemoveClaimAsync(user, profilePictureUrlClaim);
+    }
+
+    var bioClaim = claims.FirstOrDefault(c => c.Type == "Bio");
+    if (!string.IsNullOrEmpty(Input.Bio))
+    {
+        if (bioClaim == null)
+        {
+            await _userManager.AddClaimAsync(user, new Claim("Bio", Input.Bio));
+        }
+        else if (bioClaim.Value != Input.Bio)
+        {
+            await _userManager.RemoveClaimAsync(user, bioClaim);
+            await _userManager.AddClaimAsync(user, new Claim("Bio", Input.Bio));
+        }
+    }
+    else if (bioClaim != null)
+    {
+        await _userManager.RemoveClaimAsync(user, bioClaim);
+    }
+
+    await _signInManager.RefreshSignInAsync(user);
+    StatusMessage = "Your profile has been updated";
+    return RedirectToPage();
+}
+
     }
 }

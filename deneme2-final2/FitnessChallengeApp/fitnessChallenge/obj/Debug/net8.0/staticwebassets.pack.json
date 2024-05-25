@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\images\\featurette.jpg"
     },
     {
+      "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\logo.webp",
+      "PackagePath": "staticwebassets\\images\\logo.webp"
+    },
+    {
       "Id": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\testimonials.jpg",
       "PackagePath": "staticwebassets\\images\\testimonials.jpg"
     },

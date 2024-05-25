@@ -3,50 +3,103 @@
 @using fitnessChallenge.Models
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<style>
+    .card {
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .rating .rateyo {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .search-bar {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        display: none;
+    }
+
+    .search-bar label {
+        font-weight: bold;
+    }
+
+    .search-bar .btn-primary {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        border: none;
+    }
+    #favSearch  {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        border: none;
+    }
+
+    .search-bar .btn-secondary {
+        border: none;
+    }
+
+    .challenge-card {
+        margin-bottom: 20px;
+    }
+
+    .btn-toggle {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        border: none;
+        color: white;
+    }
+</style>
+
 <div class="container mt-5">
     <h2 class="text-center mb-4">Challenges</h2>
+
+    <button id="toggleSearch" class="btn btn-toggle mb-4">Toggle Search</button>
     
-    <form method="get" class="mb-4">
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                <label>Keyword</label>
-                <input type="text" asp-for="Search.Keyword" class="form-control" placeholder="Enter keyword" />
+    <div class="search-bar mb-4">
+        <form method="get">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Keyword</label>
+                    <input type="text" asp-for="Search.Keyword" class="form-control" placeholder="Enter keyword" />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Difficulty</label>
+                    <select asp-for="Search.Difficulty" asp-items="Html.GetEnumSelectList<Challenge.Difficulty_Level>()" class="form-control">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Category</label>
+                    <select asp-for="Search.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()" class="form-control">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Start Date</label>
+                    <input type="date" asp-for="Search.StartDate" class="form-control" />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>End Date</label>
+                    <input type="date" asp-for="Search.EndDate" class="form-control" />
+                </div>
+                <div class="col-md-3 mb-3 align-self-end">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a href=".\Challenges" class="btn btn-secondary">Clear</a>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <label>Difficulty</label>
-                <select asp-for="Search.Difficulty" asp-items="Html.GetEnumSelectList<Challenge.Difficulty_Level>()" class="form-control">
-                    <option value="">All</option>
-                </select>
-            </div>
-            <div class="col-md-3 mb-3">
-                <label>Category</label>
-                <select asp-for="Search.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()" class="form-control">
-                    <option value="">All</option>
-                </select>
-            </div>
-            <div class="col-md-3 mb-3">
-                <label>Start Date</label>
-                <input type="date" asp-for="Search.StartDate" class="form-control" />
-            </div>
-            <div class="col-md-3 mb-3">
-                <label>End Date</label>
-                <input type="date" asp-for="Search.EndDate" class="form-control" />
-            </div>
-            <div class="col-md-3 mb-3 align-self-end">
-                <button type="submit" class="btn btn-primary">Search</button>
-                <a href=".\Challenges" class="btn btn-secondary">Clear</a>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
     <div class="row">
         @if (Model.Challenges != null && Model.Challenges.Count > 0)
         {
-            foreach (var challenge in Model.Challenges)
+            @foreach (var challenge in Model.Challenges)
             {
                 var averageRating = Model.ChallengeRatings.ContainsKey(challenge.Id) ? Model.ChallengeRatings[challenge.Id] : 0;
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-md-4 challenge-card">
+                    <div class="card shadow-sm h-100">
                         <div class="card-body">
                             <h5 class="card-title">@challenge.Title</h5>
                             <p class="card-text">@challenge.Description</p>
@@ -68,7 +121,7 @@
                                 {
                                     <form method="post" asp-page-handler="Favorite">
                                         <input type="hidden" name="challengeId" value="@challenge.Id" />
-                                        <button type="submit" class="btn btn-primary">Fav</button>
+                                        <button id="favSearch" type="submit" class="btn btn-primary">Fav</button>
                                     </form>
                                 }
                                 <a asp-page="./Review" asp-route-id="@challenge.Id" class="btn btn-secondary">Review</a>
@@ -94,12 +147,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     <script>
         $(document).ready(function() {
+            $("#toggleSearch").click(function() {
+                $(".search-bar").slideToggle();
+            });
+
             $(".rating").each(function() {
                 var rating = $(this).data("rating");
                 $(this).rateYo({
                     rating: rating,
                     readOnly: true,
-                    starWidth: "20px"
+                    starWidth: "20px",
+                    normalFill: "#A0A0A0",
+                    ratedFill: "#E74C3C"
                 });
             });
         });

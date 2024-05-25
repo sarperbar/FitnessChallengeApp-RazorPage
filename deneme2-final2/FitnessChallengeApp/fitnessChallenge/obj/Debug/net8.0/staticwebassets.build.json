@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "de3Kq6/g8kdTocH47bHZ0+v64dn2QeD31tb0o7rr6fc=",
+  "Hash": "o3496oBdtVGgKL3UbAPmVUG9ujtfan+o1ILEADzmMec=",
   "Source": "fitnessChallenge",
   "BasePath": "_content/fitnessChallenge",
   "Mode": "Default",
@@ -1307,6 +1307,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\featurette.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\logo.webp",
+      "SourceId": "fitnessChallenge",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\",
+      "BasePath": "_content/fitnessChallenge",
+      "RelativePath": "images/logo.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logo.webp"
     },
     {
       "Identity": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\deneme2-final2\\FitnessChallengeApp\\fitnessChallenge\\wwwroot\\images\\testimonials.jpg",

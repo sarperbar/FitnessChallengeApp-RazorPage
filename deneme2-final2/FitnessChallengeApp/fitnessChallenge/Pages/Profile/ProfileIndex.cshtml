@@ -8,23 +8,23 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4 text-center">
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-                <div class="card-body">
-                    <h4 class="card-title">Profile Picture</h4>
+            
+                
+                <div>    
                     @if (!string.IsNullOrEmpty(Model.ProfilePictureUrl))
                     {
-                        <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px; max-height: 150px;" />
+                        <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 300px; max-height: 300px;" />
                     }
                     else
                     {
                         <p>No profile picture set.</p>
                     }
-                </div>
-            </div>
+               </div>
+            
 
             <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-                <div class="card-body">
-                    <h4 class="card-title">Bio</h4>
+                
+                    
                     <p>@Model.Bio</p>
                 </div>
             </div>

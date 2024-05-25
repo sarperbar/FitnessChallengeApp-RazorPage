@@ -4,26 +4,124 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron text-center bg-primary text-white">
-    <h1 class="display-4">Welcome to fitnessChallenge!</h1>
+<style>
+    .jumbotron {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: white;
+        padding: 2rem 1rem;
+    }
+
+    .jumbotron img {
+        max-width: 150px;
+        margin-bottom: 1rem;
+    }
+
+    .jumbotron h1 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+    }
+
+    .jumbotron p.lead {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.2rem;
+    }
+
+    .container-marketing .col-lg-4 img {
+        border: 5px solid white;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .container-marketing .col-lg-4 img:hover {
+        transform: scale(1.1);
+    }
+
+    .featurette-divider {
+        margin: 3rem 0;
+    }
+
+    .featurette-heading {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+    }
+
+    .featurette p.lead {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.1rem;
+    }
+
+    .blockquote {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .blockquote-footer {
+        font-size: 0.9rem;
+    }
+
+    .rounded-circle {
+        border-radius: 50%;
+    }
+
+    .hover-link {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .hover-link:hover {
+        color: #6a11cb;
+    }
+
+    @@media (max-width: 768px) {
+        .featurette-heading {
+            font-size: 2rem;
+        }
+
+        .jumbotron img {
+            max-width: 100px;
+        }
+    }
+</style>
+
+<div class="jumbotron text-center">
+    <img src="~/images/logo.webp" class="img-fluid" alt="FitQuest Logo">
+    <h1 class="display-4">Welcome to FitQuest by Sarper ERBAR!</h1>
     <p class="lead">Join us and take on exciting fitness challenges tailored just for you.</p>
     <hr class="my-4">
     <p>Start your fitness journey, participate in challenges, and achieve your goals with a supportive community.</p>
 </div>
 
 <div class="container marketing">
-    <div class="row">
-        <div class="col-lg-4 text-center">
-            <img src="~/images/explore-challenges.jpg" class="img-fluid rounded-circle mb-3" alt="Explore Challenges">
-            <h2>Explore Challenges</h2>
-            <p>Browse through various fitness challenges, from yoga to bodybuilding. Find what suits you best and start today!</p>
+    <br><br><br>
+    <div class="row text-center">
+        <div class="col-lg-4">
+            <a href="/Challenges/Index" class="hover-link">
+                <img src="~/images/explore-challenges.jpg" class="img-fluid rounded-circle mb-3" alt="Explore Challenges">
+                <h2>Explore Challenges</h2>
+                <p>Browse through various fitness challenges, from yoga to bodybuilding. Find what suits you best and start today!</p>
+            </a>
         </div>
-        <div class="col-lg-4 text-center">
-            <img src="~/images/create-challenge.jpg" class="img-fluid rounded-circle mb-3" alt="Create Challenge">
-            <h2>Create Your Own Challenge</h2>
-            <p>Have a fitness goal in mind? Create your own challenge and share it with others. Motivate yourself and your friends!</p>
-        </div>
-        <div class="col-lg-4 text-center">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="col-lg-4">
+                <a href="/Challenges/Create" class="hover-link">
+                    <img src="~/images/create-challenge.jpg" class="img-fluid rounded-circle mb-3" alt="Create Challenge">
+                    <h2>Create Your Own Challenge</h2>
+                    <p>Have a fitness goal in mind? Create your own challenge and share it with others. Motivate yourself and your friends!</p>
+                </a>
+            </div>
+        }else {
+
+               <div class="col-lg-4">
+                    <img src="~/images/create-challenge.jpg" class="img-fluid rounded-circle mb-3" alt="Create Challenge">
+                    <h2>Create Your Own Challenge</h2>
+                    <p>Have a fitness goal in mind? Create your own challenge and share it with others. Motivate yourself and your friends!</p>
+                
+            </div>
+        }
+        
+
+        <div class="col-lg-4">
             <img src="~/images/community.jpg" class="img-fluid rounded-circle mb-3" alt="Join the Community">
             <h2>Join the Community</h2>
             <p>Connect with other fitness enthusiasts, rate challenges, and leave feedback. Be a part of our supportive community.</p>
@@ -34,13 +132,12 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading">Why Choose fitnessChallenge? <span class="text-muted">It'll blow your mind.</span></h2>
+            <h2 class="featurette-heading">Why Choose FitQuest? <span class="text-muted">It'll blow your mind.</span></h2>
             <p class="lead">We offer a variety of fitness challenges that cater to all levels of experience. Whether you are just starting out or are a seasoned athlete, you will find something that suits your needs.</p>
             <ul class="list-unstyled">
                 <li>Personalized Challenges</li>
                 <li>Community Support</li>
-                <li>Progress Tracking</li>
-                <li>Expert Tips and Advice</li>
+                <li>Track Your Progress</li>
             </ul>
         </div>
         <div class="col-md-5">
@@ -54,12 +151,12 @@
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">Testimonials <span class="text-muted">See what our users are saying:</span></h2>
             <blockquote class="blockquote">
-                <p class="mb-0">"FitnessChallenge has completely transformed my workout routine. The community is incredibly supportive!"<br><br></p>
-                <footer class="blockquote-footer">Alex, <cite title="Source Title">Regular User</cite></footer>
+                <p class="mb-0">"FitQuest has completely transformed my workout routine. The community is incredibly supportive!"<br><br></p>
+                <footer class="blockquote-footer">Alex Moran, <cite title="Source Title">Regular User</cite></footer>
             </blockquote>
             <blockquote class="blockquote">
                 <p class="mb-0">"The variety of challenges keeps me motivated and excited to work out every day."<br><br></p>
-                <footer class="blockquote-footer">Jordan, <cite title="Source Title">Fitness Enthusiast</cite></footer>
+                <footer class="blockquote-footer">Jordan M., <cite title="Source Title">Fitness Enthusiast</cite></footer>
             </blockquote>
         </div>
         <div class="col-md-5 order-md-1">
