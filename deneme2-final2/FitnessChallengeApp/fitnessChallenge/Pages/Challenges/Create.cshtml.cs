@@ -27,18 +27,14 @@ namespace fitnessChallenge.Pages.Challenges
 
         public async Task<IActionResult> OnPostAsync()
         {
-
-            /*
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            */
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                
                 return RedirectToPage("/Error");
             }
 
@@ -51,8 +47,4 @@ namespace fitnessChallenge.Pages.Challenges
             return RedirectToPage("./Index");
         }
     }
-
-
-
-    
 }

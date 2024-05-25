@@ -6,14 +6,13 @@
 }
 
 <style>
-     body {
+    body {
         background: linear-gradient(to right, #6a11cb, #2575fc);
         font-family: 'Open Sans', sans-serif;
     }
     .card {
         transition: transform 0.3s;
     }
-
 </style>
 
 <div class="container mt-5">
@@ -22,43 +21,51 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" id="challengeForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="Challenge.Title" class="form-label">Challenge Title</label>
-                            <input asp-for="Challenge.Title" class="form-control" placeholder="Enter challenge title" />
+                            <input asp-for="Challenge.Title" class="form-control" placeholder="Enter challenge title" required />
                             <span asp-validation-for="Challenge.Title" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Challenge.Description" class="form-label">Description</label>
-                            <textarea asp-for="Challenge.Description" class="form-control" rows="3" placeholder="Enter challenge description"></textarea>
+                            <textarea asp-for="Challenge.Description" class="form-control" rows="3" placeholder="Enter challenge description" required></textarea>
                             <span asp-validation-for="Challenge.Description" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Challenge.StartDate" class="form-label">Start Date</label>
-                            <input asp-for="Challenge.StartDate" type="date" class="form-control" />
+                            <input asp-for="Challenge.StartDate" type="date" class="form-control" required />
                             <span asp-validation-for="Challenge.StartDate" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Challenge.EndDate" class="form-label">End Date</label>
-                            <input asp-for="Challenge.EndDate" type="date" class="form-control" />
+                            <input asp-for="Challenge.EndDate" type="date" class="form-control" required />
                             <span asp-validation-for="Challenge.EndDate" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Challenge.DifficultyLevel" class="form-label">Difficulty Level</label>
-                            <select asp-for="Challenge.DifficultyLevel" asp-items="Html.GetEnumSelectList<Challenge.Difficulty_Level>()" class="form-control"></select>
+                            <select asp-for="Challenge.DifficultyLevel" asp-items="Html.GetEnumSelectList<Challenge.Difficulty_Level>()" class="form-control" required></select>
                             <span asp-validation-for="Challenge.DifficultyLevel" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Challenge.Category" class="form-label">Category</label>
-                            <select asp-for="Challenge.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()" class="form-control"></select>
+                            <select asp-for="Challenge.Category" asp-items="Html.GetEnumSelectList<Challenge.CategoryType>()" class="form-control" required></select>
                             <span asp-validation-for="Challenge.Category" class="text-danger"></span>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block mt-4" style="background: linear-gradient(to right, #6a11cb, #2575fc); border: none;">Create Challenge</button>
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById("challengeForm").addEventListener("submit", function (event) {
+        if (!this.checkValidity()) {
+            event.preventDefault();
+            alert("Please fill out the required fields.");
+        }
+    });
+</script>
