@@ -12,8 +12,12 @@
         <li class="nav-item d-flex align-items-center">
             @if (!string.IsNullOrEmpty(profilePictureUrl))
             {
+                <a href="/Profile/ProfileIndex" class="hover-link">
                 <img src="@profilePictureUrl" alt="Profile Picture" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+            
+                </a>
             }
+
             <a class="nav-link d-inline" asp-area="" asp-page="/Challenges/Index">Challenges</a>
         </li>
         <li class="nav-item">
