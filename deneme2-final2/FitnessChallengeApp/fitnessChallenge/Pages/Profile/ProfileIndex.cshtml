@@ -5,33 +5,31 @@
     ViewData["Title"] = "My Profile";
 }
 
-<div class="container mt-5">
+<div class="container mt-5 profile-container">
     <div class="row">
         <div class="col-md-4 text-center">
-            
-                
-                <div>    
-                    @if (!string.IsNullOrEmpty(Model.ProfilePictureUrl))
-                    {
-                        <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 300px; max-height: 300px;" />
-                    }
-                    else
-                    {
-                        <p>No profile picture set.</p>
-                    }
-               </div>
-            
+            <div class="profile-picture-container mb-4">
+                @if (!string.IsNullOrEmpty(Model.ProfilePictureUrl))
+                {
+                    <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="width: 200px; height: 200px; object-fit: cover;" />
+                }
+                else
+                {
+                    <p>No profile picture set.</p>
+                }
+            </div>
 
-            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-                
+            @if (!string.IsNullOrEmpty(Model.Bio))
+            {
+                <div class="card shadow-sm p-3 mb-5 bg-white rounded bio-card">
                     
                     <p>@Model.Bio</p>
                 </div>
-            </div>
+            }
         </div>
 
         <div class="col-md-8">
-            <h2 class="text-center mb-4">My Favorite Challenges</h2>
+            <h2 class="text-center mb-4 gradient-text">My Favorite Challenges</h2>
             <div class="row">
                 @if (Model.FavoriteChallenges != null && Model.FavoriteChallenges.Count > 0)
                 {
@@ -39,7 +37,7 @@
                     {
                         var challenge = favorite.Challenge;
                         <div class="col-md-6 mb-4">
-                            <div class="card shadow-sm h-100">
+                            <div class="card shadow-sm h-100 challenge-card">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">@challenge.Title</h5>
                                     <p class="card-text">@challenge.Description</p>
@@ -52,7 +50,7 @@
                                         <small class="text-muted">End Date: @challenge.EndDate.ToShortDateString()</small>
                                     </p>
                                     <div class="mt-auto d-flex justify-content-between">
-                                        <a asp-page="/Challenges/Review" asp-route-id="@challenge.Id" class="btn btn-secondary">Review</a>
+                                        <a asp-page="/Challenges/Review" asp-route-id="@challenge.Id" class="btn btn-primary">Review</a>
                                         <form method="post" asp-page-handler="RemoveFavorite" asp-route-favoriteId="@favorite.Id">
                                             <button type="submit" class="btn btn-danger">Remove</button>
                                         </form>
@@ -76,20 +74,71 @@
 </div>
 
 <style>
+    body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: #fff;
+    }
+    .profile-container {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .profile-picture-container {
+        position: relative;
+    }
+    .profile-picture-container img {
+        border: 5px solid #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
+    .bio-card {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        color: black;
+         font-family: 'Open Sans', sans-serif;
+    }
+    .bio-card .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+    .challenge-card {
+        transition: transform 0.2s;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+    .challenge-card:hover {
+        transform: scale(1.05);
+    }
     .card-title {
         font-weight: bold;
         font-size: 1.25rem;
+        color: #343a40;
     }
     .card-text {
-        font-size: 0.9rem;
+        font-size: 1rem;
+        color: #6c757d;
     }
-    .btn {
-        margin: 5px 0;
+    .btn-primary {
+        background-color: #6a11cb;
+        border-color: #6a11cb;
     }
-    .rounded-circle {
-        border: 1px solid #ddd;
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+    .btn-primary:hover {
+        background-color: #5a0dba;
+        border-color: #5a0dba;
+    }
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #c82333;
+    }
+    @* .rounded-circle {
+        border: 2px solid #007bff;
         padding: 5px;
-    }
+    } *@
     .h-100 {
         height: 100%;
     }
@@ -104,5 +153,10 @@
     }
     .alert-link {
         color: #007bff;
+    }
+    .gradient-text {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 </style>

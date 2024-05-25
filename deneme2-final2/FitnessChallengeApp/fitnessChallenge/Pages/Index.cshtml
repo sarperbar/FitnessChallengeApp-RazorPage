@@ -5,10 +5,17 @@
 }
 
 <style>
-    .jumbotron {
+    body {
         background: linear-gradient(to right, #6a11cb, #2575fc);
         color: white;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .jumbotron {
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
         padding: 2rem 1rem;
+        border-radius: 10px;
     }
 
     .jumbotron img {
@@ -69,7 +76,7 @@
     }
 
     .hover-link:hover {
-        color: #6a11cb;
+        color: #333333;
     }
 
     @@media (max-width: 768px) {
@@ -110,16 +117,15 @@
                     <p>Have a fitness goal in mind? Create your own challenge and share it with others. Motivate yourself and your friends!</p>
                 </a>
             </div>
-        }else {
-
-               <div class="col-lg-4">
-                    <img src="~/images/create-challenge.jpg" class="img-fluid rounded-circle mb-3" alt="Create Challenge">
-                    <h2>Create Your Own Challenge</h2>
-                    <p>Have a fitness goal in mind? Create your own challenge and share it with others. Motivate yourself and your friends!</p>
-                
+        }
+        else
+        {
+            <div class="col-lg-4">
+                <img src="~/images/create-challenge.jpg" class="img-fluid rounded-circle mb-3" alt="Create Challenge">
+                <h2>Create Your Own Challenge</h2>
+                <p>Have a fitness goal in mind? Create your own challenge and share it with others. Motivate yourself and your friends!</p>
             </div>
         }
-        
 
         <div class="col-lg-4">
             <img src="~/images/community.jpg" class="img-fluid rounded-circle mb-3" alt="Join the Community">
