@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kzgFK/PUAwiTJklohqs+1E88JIxWIXbhr2vDgqya/rzETY7Wr90leDRY8D17fMZXM6GIvH7NkgoiJz8H8UMawA==",
+  "dgSpecHash": "n65eSE/c5zu2vqqhzttLN5roDHI9PPe297oIEKcNDkdVK3KRvqQrXq9LztR6Tjlb92LKPAbkOOOl6MxCnkPh9A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Sarper\\Desktop\\382Project\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj",
+  "projectFilePath": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sarper\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Sarper\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

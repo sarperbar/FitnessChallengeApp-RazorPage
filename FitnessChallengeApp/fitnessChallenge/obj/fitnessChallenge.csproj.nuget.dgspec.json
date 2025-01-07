@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sarper\\Desktop\\382Project\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj": {}
+    "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sarper\\Desktop\\382Project\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj": {
+    "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sarper\\Desktop\\382Project\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj",
+        "projectUniqueName": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj",
         "projectName": "fitnessChallenge",
-        "projectPath": "C:\\Users\\Sarper\\Desktop\\382Project\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj",
+        "projectPath": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\fitnessChallenge.csproj",
         "packagesPath": "C:\\Users\\Sarper\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sarper\\Desktop\\382Project\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\obj\\",
+        "outputPath": "C:\\Users\\Sarper\\Documents\\GitHub\\deneme2\\FitnessChallengeApp\\fitnessChallenge\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
